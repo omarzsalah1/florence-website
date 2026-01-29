@@ -1341,7 +1341,7 @@
         }
         
         .pathway-feature::before {
-            content: "✓";
+            content: "<svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#22c55e" stroke-width="2" fill="none"/><path d="M8 12L11 15L16 9" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>";
             color: var(--success);
             font-weight: bold;
         }
@@ -3283,7 +3283,7 @@
     top: 50%;
     transform: translateY(-50%);
     z-index: 1000;
-    display: flex;
+    display: none; /* Hidden - was causing black bar issue */
     flex-direction: column;
     gap: 12px;
 }
@@ -4016,7 +4016,46 @@
         }
     }
 
-    </style>
+    
+/* Card Width Optimization - Added to fix full-width card issue */
+.challenge-card,
+.capability-card,
+.platform-card,
+.security-card {
+    max-width: 350px;
+    width: 100%;
+}
+
+.challenge-grid,
+.capabilities-grid,
+.platform-grid,
+.security-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 24px;
+}
+
+
+/* Checkmark icon replacement */
+.pathway-feature::before {
+    content: "";
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2322c55e' stroke-width='3'%3E%3Cpath d='M5 12l5 5L20 7'/%3E%3C/svg%3E") no-repeat center;
+    margin-right: 8px;
+}
+
+.benefit-check {
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+</style>
 </head>
 <body>
 
@@ -4078,7 +4117,8 @@
                 </div>
                 <div class="hero-tagline">Every Patient Feels Heard</div>
                 <h1>Your Care Team, Everywhere at Once</h1>
-                <p>The patient who needed you at 3 AM? Florence was there. The follow-up call that prevents a readmission? Florence made it. Your expertise, amplified—not replaced.</p>
+                <p class="plan-only">The patient who needed you at 3 AM? Florence was there. The follow-up call that prevents a readmission? Florence made it. Your expertise, amplified—not replaced.</p>
+                    <p class="provider-only">Florence delivers your data and tools directly into EHR workflows. That means higher engagement, better data quality, and faster alignment to value-based care—without forcing providers to change how they work.</p>
                 
                 <div class="hero-capacity">
                     <div class="capacity-headline">Reach Every Patient Who Needs You</div>
@@ -4109,8 +4149,8 @@
             <div class="demo-showcase">
                 <!-- View Toggle -->
                 <div class="demo-view-toggle">
-                    <button class="view-btn active" onclick="switchView('copilot')">🧑‍⚕️ Co-Pilot View</button>
-                    <button class="view-btn" onclick="switchView('atc')">🎛️ Air Traffic Controller</button>
+                    <button class="view-btn active" onclick="switchView('copilot')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="7" r="4" stroke="currentColor" stroke-width="2" fill="none"/><path d="M4 21v-2a4 4 0 014-4h8a4 4 0 014 4v2" stroke="currentColor" stroke-width="2" fill="none"/><path d="M9 7h6" stroke="currentColor" stroke-width="2"/><path d="M12 4v6" stroke="currentColor" stroke-width="2"/></svg> Co-Pilot View</button>
+                    <button class="view-btn" onclick="switchView('atc')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="4" y="4" width="16" height="16" rx="2" stroke="currentColor" stroke-width="2" fill="none"/><circle cx="9" cy="9" r="2" stroke="currentColor" stroke-width="2" fill="none"/><circle cx="15" cy="15" r="2" stroke="currentColor" stroke-width="2" fill="none"/><line x1="9" y1="11" x2="9" y2="18" stroke="currentColor" stroke-width="2"/><line x1="15" y1="6" x2="15" y2="13" stroke="currentColor" stroke-width="2"/></svg> Air Traffic Controller</button>
                 </div>
                 
                 <div class="demo-container">
@@ -4128,17 +4168,17 @@
                             <div class="ehr-header">
                                 <div class="ehr-logo">HealthChart EHR</div>
                                 <div class="ehr-user">
-                                    <span>👤</span>
+                                    <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="2" fill="none"/><path d="M4 20v-2a8 8 0 0116 0v2" stroke="currentColor" stroke-width="2" fill="none"/></svg></span>
                                     <span>David Brooks, RN</span>
                                 </div>
                             </div>
                             <div class="ehr-body">
                                 <div class="ehr-sidebar">
-                                    <div class="ehr-nav-item active">📋 Chart</div>
-                                    <div class="ehr-nav-item">📅 Encounters</div>
-                                    <div class="ehr-nav-item">⚠️ Problems</div>
-                                    <div class="ehr-nav-item">💊 Medications</div>
-                                    <div class="ehr-nav-item">📆 Appointments</div>
+                                    <div class="ehr-nav-item active"><svg width="32" height="32" viewBox="0 0 64 64" fill="none"><rect x="12" y="12" width="40" height="44" rx="4" stroke="#2DD4BF" stroke-width="3" fill="none"/><rect x="24" y="6" width="16" height="12" rx="2" stroke="#2DD4BF" stroke-width="2" fill="none"/><line x1="20" y1="28" x2="44" y2="28" stroke="#2DD4BF" stroke-width="2"/><line x1="20" y1="38" x2="44" y2="38" stroke="#2DD4BF" stroke-width="2"/><line x1="20" y1="48" x2="36" y2="48" stroke="#2DD4BF" stroke-width="2"/></svg> Chart</div>
+                                    <div class="ehr-nav-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="18" rx="2" stroke="currentColor" stroke-width="2" fill="none"/><line x1="3" y1="10" x2="21" y2="10" stroke="currentColor" stroke-width="2"/><line x1="8" y1="2" x2="8" y2="6" stroke="currentColor" stroke-width="2"/><line x1="16" y1="2" x2="16" y2="6" stroke="currentColor" stroke-width="2"/></svg> Encounters</div>
+                                    <div class="ehr-nav-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 2L2 22H22L12 2Z" stroke="#EAB308" stroke-width="2" fill="none"/><line x1="12" y1="9" x2="12" y2="14" stroke="#EAB308" stroke-width="2"/><circle cx="12" cy="18" r="1" fill="#EAB308"/></svg> Problems</div>
+                                    <div class="ehr-nav-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="3" y="8" width="18" height="8" rx="4" stroke="currentColor" stroke-width="2" fill="none"/><line x1="12" y1="8" x2="12" y2="16" stroke="currentColor" stroke-width="2"/></svg> Medications</div>
+                                    <div class="ehr-nav-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="18" rx="2" stroke="currentColor" stroke-width="2" fill="none"/><line x1="3" y1="10" x2="21" y2="10" stroke="currentColor" stroke-width="2"/></svg> Appointments</div>
                                 </div>
                                 <div class="ehr-main" id="ehrMain">
                                     <div class="patient-banner">
@@ -4147,7 +4187,7 @@
                                             <p>75 y/o Female • MRN: 847291 • CHF, COPD, Dementia, T2DM, CKD Stage 3</p>
                                         </div>
                 <div class="ai-oversight-banner">
-                    <span class="icon">🛡️</span>
+                    <span class="icon"><svg width="32" height="32" viewBox="0 0 64 64" fill="none"><path d="M32 4L56 14V32C56 46 44 56 32 60C20 56 8 46 8 32V14L32 4Z" stroke="#2DD4BF" stroke-width="3" fill="none"/><path d="M24 32L30 38L40 26" stroke="#2DD4BF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
                     <p><strong>Human-Supervised AI:</strong> Florence's outputs are always reviewed by your care team—no clinical decisions are made autonomously. Your expertise guides every patient interaction.</p>
                 </div>
 
@@ -4250,7 +4290,7 @@
                             
                             <div class="action-buttons">
                                 <button class="action-btn engage" onclick="toggleDropdown('engageDropdown')">
-                                    ⚡ Engage <span class="dropdown-arrow">▼</span>
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" stroke="currentColor" stroke-width="2" fill="none"/></svg> Engage <span class="dropdown-arrow">▼</span>
                                     <div class="dropdown-menu" id="engageDropdown">
                                         <div class="dropdown-item" onclick="startCall('tcm')">TCM - Post-discharge</div>
                                         <div class="dropdown-item" onclick="startCall('ccm')">CCM - Monthly</div>
@@ -4261,14 +4301,14 @@
                                     </div>
                                 </button>
                                 <button class="action-btn convene" onclick="toggleDropdown('conveneDropdown')">
-                                    📞 Convene <span class="dropdown-arrow">▼</span>
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91" stroke="currentColor" stroke-width="2" fill="none"/></svg> Convene <span class="dropdown-arrow">▼</span>
                                     <div class="dropdown-menu" id="conveneDropdown">
                                         <div class="dropdown-item" onclick="startCall('convene-now')">Now - Live call</div>
                                         <div class="dropdown-item" onclick="startCall('convene-schedule')">Schedule</div>
                                     </div>
                                 </button>
                                 <button class="action-btn checkin" onclick="toggleDropdown('checkinDropdown')">
-                                    💬 Check-In <span class="dropdown-arrow">▼</span>
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2v10z" stroke="currentColor" stroke-width="2" fill="none"/></svg> Check-In <span class="dropdown-arrow">▼</span>
                                     <div class="dropdown-menu" id="checkinDropdown">
                                         <div class="dropdown-item" onclick="startCall('checkin-hospital')">Post-Hospitalization</div>
                                         <div class="dropdown-item" onclick="startCall('checkin-sick')">Post-Sick Visit</div>
@@ -4299,7 +4339,7 @@
                                     
                                     <!-- ADT Alert -->
                                     <div class="facesheet-card alert-card">
-                                        <div class="alert-icon" style="background: rgba(239, 68, 68, 0.15); color: var(--danger);">🚨</div>
+                                        <div class="alert-icon" style="background: rgba(239, 68, 68, 0.15); color: var(--danger);"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#EF4444" stroke-width="2" fill="none"/><line x1="12" y1="8" x2="12" y2="12" stroke="#EF4444" stroke-width="2"/><circle cx="12" cy="16" r="1" fill="#EF4444"/></svg></div>
                                         <div class="alert-content">
                                             <div class="alert-header">
                                                 <span class="alert-label">ADT Alert</span>
@@ -4312,7 +4352,7 @@
                                     
                                     <!-- Active Engagement -->
                                     <div class="facesheet-card engagement-card">
-                                        <div class="alert-icon" style="background: rgba(34, 197, 94, 0.15); color: var(--success);">✓</div>
+                                        <div class="alert-icon" style="background: rgba(34, 197, 94, 0.15); color: var(--success);"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#22c55e" stroke-width="2" fill="none"/><path d="M8 12L11 15L16 9" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
                                         <div class="alert-content">
                                             <div class="alert-header">
                                                 <span class="alert-label">Active Engagement</span>
@@ -4320,8 +4360,8 @@
                                             </div>
                                             <div class="alert-text">Patient engaged in TCM for 4 days</div>
                                             <div class="alert-subtext">
-                                                <span>⏰ Last: Jan 18, 2026</span>
-                                                <span style="margin-left: 1rem;">📅 Next: Jan 22, 2026</span>
+                                                <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" fill="none"/><path d="M12 6v6l4 2" stroke="currentColor" stroke-width="2"/></svg> Last: Jan 18, 2026</span>
+                                                <span style="margin-left: 1rem;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="18" rx="2" stroke="currentColor" stroke-width="2" fill="none"/><line x1="3" y1="10" x2="21" y2="10" stroke="currentColor" stroke-width="2"/><line x1="8" y1="2" x2="8" y2="6" stroke="currentColor" stroke-width="2"/><line x1="16" y1="2" x2="16" y2="6" stroke="currentColor" stroke-width="2"/></svg> Next: Jan 22, 2026</span>
                                             </div>
                                         </div>
                                     </div>
@@ -4329,14 +4369,14 @@
                                     <!-- Accordion Sections -->
                                     <div class="accordion-section">
                                         <div class="accordion-header" onclick="toggleAccordion('externalRecords')">
-                                            <span>✨ External Records</span>
+                                            <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 2l2.4 7.2H22l-6 4.8 2.4 7.2L12 16.8l-6.4 4.4 2.4-7.2-6-4.8h7.6L12 2z" stroke="#2DD4BF" stroke-width="2" fill="none"/></svg> External Records</span>
                                             <span class="accordion-badge">New</span>
                                             <span class="accordion-arrow" id="externalRecordsArrow">▼</span>
                                         </div>
                                         <div class="accordion-content" id="externalRecords">
                                             <div class="external-record">
                                                 <div class="record-header">
-                                                    <span class="record-icon">🧪</span>
+                                                    <span class="record-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M9 3h6M10 3v7l-5 9h14l-5-9V3" stroke="currentColor" stroke-width="2" fill="none"/></svg></span>
                                                     <span class="record-title">Comprehensive Metabolic Panel</span>
                                                     <span class="record-date">4 days ago</span>
                                                 </div>
@@ -4349,7 +4389,7 @@
                                             </div>
                                             <div class="external-record">
                                                 <div class="record-header">
-                                                    <span class="record-icon">💊</span>
+                                                    <span class="record-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="3" y="8" width="18" height="8" rx="4" stroke="currentColor" stroke-width="2" fill="none"/><line x1="12" y1="8" x2="12" y2="16" stroke="currentColor" stroke-width="2"/></svg></span>
                                                     <span class="record-title">Sevelamer 800mg TID</span>
                                                 </div>
                                                 <div class="record-note">Phosphate binder - commonly prescribed for CKD</div>
@@ -4357,7 +4397,7 @@
                                             </div>
                                             <div class="external-record">
                                                 <div class="record-header">
-                                                    <span class="record-icon">⚠️</span>
+                                                    <span class="record-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 2L2 22H22L12 2Z" stroke="#EAB308" stroke-width="2" fill="none"/><line x1="12" y1="9" x2="12" y2="14" stroke="#EAB308" stroke-width="2"/><circle cx="12" cy="18" r="1" fill="#EAB308"/></svg></span>
                                                     <span class="record-title">Suspected CKD Stage 4</span>
                                                 </div>
                                                 <div class="record-note">eGFR 29 from nephrology consult (Dr...)</div>
@@ -4368,7 +4408,7 @@
                                     
                                     <div class="accordion-section">
                                         <div class="accordion-header" onclick="toggleAccordion('problemList')">
-                                            <span>📋 Problem List</span>
+                                            <span><svg width="32" height="32" viewBox="0 0 64 64" fill="none"><rect x="12" y="12" width="40" height="44" rx="4" stroke="#2DD4BF" stroke-width="3" fill="none"/><rect x="24" y="6" width="16" height="12" rx="2" stroke="#2DD4BF" stroke-width="2" fill="none"/><line x1="20" y1="28" x2="44" y2="28" stroke="#2DD4BF" stroke-width="2"/><line x1="20" y1="38" x2="44" y2="38" stroke="#2DD4BF" stroke-width="2"/><line x1="20" y1="48" x2="36" y2="48" stroke="#2DD4BF" stroke-width="2"/></svg> Problem List</span>
                                             <span class="accordion-count">(4 conditions)</span>
                                             <span class="accordion-arrow" id="problemListArrow">▶</span>
                                         </div>
@@ -4382,7 +4422,7 @@
                                     
                                     <div class="accordion-section">
                                         <div class="accordion-header" onclick="toggleAccordion('appointments')">
-                                            <span>📅 Upcoming Appointments</span>
+                                            <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="18" rx="2" stroke="currentColor" stroke-width="2" fill="none"/><line x1="3" y1="10" x2="21" y2="10" stroke="currentColor" stroke-width="2"/><line x1="8" y1="2" x2="8" y2="6" stroke="currentColor" stroke-width="2"/><line x1="16" y1="2" x2="16" y2="6" stroke="currentColor" stroke-width="2"/></svg> Upcoming Appointments</span>
                                             <span class="accordion-count">(1)</span>
                                             <span class="accordion-arrow" id="appointmentsArrow">▶</span>
                                         </div>
@@ -4396,7 +4436,7 @@
                                     
                                     <div class="accordion-section">
                                         <div class="accordion-header" onclick="toggleAccordion('careGaps')">
-                                            <span>⚠️ Care Gaps</span>
+                                            <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 2L2 22H22L12 2Z" stroke="#EAB308" stroke-width="2" fill="none"/><line x1="12" y1="9" x2="12" y2="14" stroke="#EAB308" stroke-width="2"/><circle cx="12" cy="18" r="1" fill="#EAB308"/></svg> Care Gaps</span>
                                             <span class="accordion-arrow" id="careGapsArrow">▶</span>
                                         </div>
                                         <div class="accordion-content collapsed" id="careGaps">
@@ -4459,7 +4499,7 @@
                     <div class="atc-view" id="atcView">
                         <div class="atc-header">
                             <div>
-                                <div class="atc-title">🎛️ Supervised Autonomy Dashboard</div>
+                                <div class="atc-title"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="4" y="4" width="16" height="16" rx="2" stroke="currentColor" stroke-width="2" fill="none"/><circle cx="9" cy="9" r="2" stroke="currentColor" stroke-width="2" fill="none"/><circle cx="15" cy="15" r="2" stroke="currentColor" stroke-width="2" fill="none"/><line x1="9" y1="11" x2="9" y2="18" stroke="currentColor" stroke-width="2"/><line x1="15" y1="6" x2="15" y2="13" stroke="currentColor" stroke-width="2"/></svg> Supervised Autonomy Dashboard</div>
                                 <div style="font-size: 0.8rem; color: var(--text-muted);">1 Care Manager : 12 Active Calls</div>
                             </div>
                             <div class="atc-stats">
@@ -4517,7 +4557,8 @@
         <div class="memory-container">
             <div class="memory-grid">
                 <div class="memory-content">
-                    <h2>Florence Remembers What Matters</h2>
+                    <h2 class="plan-only">Florence Remembers What Matters</h2>
+            <h2 class="provider-only">Seamless EHR Integration</h2>
                     <p>Every conversation builds deeper understanding. Florence remembers that Mrs. Garcia's husband Manuel drives her to appointments. That her grandson's soccer games are on Tuesdays. That she prefers afternoon calls after 2 PM.</p>
                     <p>This isn't data retrieval—it's <strong>relationship building at scale</strong>. While other AI tools treat every interaction as transactional, Florence creates continuity that patients can feel.</p>
                     <div class="memory-highlight">
@@ -4544,9 +4585,9 @@
                             <div class="memory-bubble">"I know Manuel usually drives you—will he be available for your cardiology appointment next week?"</div>
                             <div class="memory-bubble">"Since you mentioned the afternoon works better, I've noted 2 PM for future calls."</div>
                             <div style="margin-top: 12px;">
-                                <span class="memory-node">🧠 Family context</span>
-                                <span class="memory-node">📅 Schedule preferences</span>
-                                <span class="memory-node">🚗 Transportation</span>
+                                <span class="memory-node"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 4C8 4 4 8 4 12s4 8 8 8 8-4 8-8-4-8-8-8z" stroke="currentColor" stroke-width="2" fill="none"/><path d="M12 8v4l2 2" stroke="currentColor" stroke-width="2"/></svg> Family context</span>
+                                <span class="memory-node"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="18" rx="2" stroke="currentColor" stroke-width="2" fill="none"/><line x1="3" y1="10" x2="21" y2="10" stroke="currentColor" stroke-width="2"/><line x1="8" y1="2" x2="8" y2="6" stroke="currentColor" stroke-width="2"/><line x1="16" y1="2" x2="16" y2="6" stroke="currentColor" stroke-width="2"/></svg> Schedule preferences</span>
+                                <span class="memory-node"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 17h14v-5l-2-4H7l-2 4v5z" stroke="currentColor" stroke-width="2" fill="none"/><circle cx="7" cy="17" r="2" stroke="currentColor" stroke-width="2" fill="none"/><circle cx="17" cy="17" r="2" stroke="currentColor" stroke-width="2" fill="none"/></svg> Transportation</span>
                             </div>
                         </div>
                     </div>
@@ -4786,7 +4827,7 @@
                                 <h5>Gap Identified</h5>
                                 <p>Patient due for A1C screening</p>
                             </div>
-                            <div class="agentic-flow-status">✓</div>
+                            <div class="agentic-flow-status"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#22c55e" stroke-width="2" fill="none"/><path d="M8 12L11 15L16 9" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
                         </div>
                         <div class="agentic-flow-step active">
                             <div class="agentic-flow-icon">2</div>
@@ -4794,7 +4835,7 @@
                                 <h5>Florence Calls</h5>
                                 <p>Patient confirms availability</p>
                             </div>
-                            <div class="agentic-flow-status">✓</div>
+                            <div class="agentic-flow-status"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#22c55e" stroke-width="2" fill="none"/><path d="M8 12L11 15L16 9" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
                         </div>
                         <div class="agentic-flow-step active">
                             <div class="agentic-flow-icon">3</div>
@@ -4802,7 +4843,7 @@
                                 <h5>Order Prepared</h5>
                                 <p>Lab order ready in EHR</p>
                             </div>
-                            <div class="agentic-flow-status">✓</div>
+                            <div class="agentic-flow-status"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#22c55e" stroke-width="2" fill="none"/><path d="M8 12L11 15L16 9" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
                         </div>
                         <div class="agentic-flow-step">
                             <div class="agentic-flow-icon">4</div>
@@ -4827,17 +4868,17 @@
         </div>
         <div class="problem-grid">
             <div class="problem-card">
-                <div class="problem-icon">📊</div>
+                <div class="problem-icon"><svg width="32" height="32" viewBox="0 0 64 64" fill="none"><rect x="8" y="28" width="12" height="28" rx="2" fill="#2DD4BF"/><rect x="26" y="16" width="12" height="40" rx="2" fill="#2DD4BF"/><rect x="44" y="8" width="12" height="48" rx="2" fill="#2DD4BF"/></svg></div>
                 <h4>Impossible Caseloads</h4>
                 <p>You have 200 patients but can only reach 20 a day. The other 180 wait—and some end up in the ER.</p>
             </div>
             <div class="problem-card">
-                <div class="problem-icon">🌙</div>
+                <div class="problem-icon"><svg width="32" height="32" viewBox="0 0 64 64" fill="none"><path d="M40 12C28 12 18 22 18 34C18 46 28 56 40 56C44 56 48 55 51 53C45 53 36 46 36 34C36 22 45 15 51 15C48 13 44 12 40 12Z" stroke="#2DD4BF" stroke-width="3" fill="none"/></svg></div>
                 <h4>After Hours = No Coverage</h4>
                 <p>Seniors are home after dark, but your staff isn’t. Who checks in at 3 AM when they’re worried about symptoms?</p>
             </div>
             <div class="problem-card">
-                <div class="problem-icon">🔥</div>
+                <div class="problem-icon"><svg width="32" height="32" viewBox="0 0 64 64" fill="none"><path d="M32 8C32 8 24 20 24 32C24 40 28 48 32 52C36 48 40 40 40 32C40 20 32 8 32 8Z" stroke="#2DD4BF" stroke-width="3" fill="none"/><path d="M28 36C28 40 30 44 32 46C34 44 36 40 36 36C36 32 32 28 32 28C32 28 28 32 28 36Z" fill="#2DD4BF"/></svg></div>
                 <h4>Burnout Is Real</h4>
                 <p>Your best care managers are exhausted. Turnover is high. You can’t hire fast enough to keep up.</p>
             </div>
@@ -4852,7 +4893,7 @@
             
             <div class="day-comparison">
                 <div class="day-column before">
-                    <h4>❌ Without Florence</h4>
+                    <h4><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#E45740" stroke-width="2" fill="none"/><line x1="8" y1="8" x2="16" y2="16" stroke="#E45740" stroke-width="2"/><line x1="16" y1="8" x2="8" y2="16" stroke="#E45740" stroke-width="2"/></svg> Without Florence</h4>
                     
                     <div class="timeline-item">
                         <span class="timeline-time">7:00 AM</span>
@@ -4924,7 +4965,7 @@
                 </div>
                 
                 <div class="day-column after">
-                    <h4>✓ With Florence</h4>
+                    <h4><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#22c55e" stroke-width="2" fill="none"/><path d="M8 12L11 15L16 9" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> With Florence</h4>
                     
                     <div class="timeline-item">
                         <span class="timeline-time">7:00 AM</span>
@@ -5070,19 +5111,19 @@
             </div>
             <div class="escalation-arrow">→</div>
             <div class="escalation-step">
-                <div class="escalation-icon">👤</div>
+                <div class="escalation-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="2" fill="none"/><path d="M4 20v-2a8 8 0 0116 0v2" stroke="currentColor" stroke-width="2" fill="none"/></svg></div>
                 <h4>You're Alerted</h4>
                 <p>Instantly connected to the patient who needs you</p>
             </div>
             <div class="escalation-arrow">→</div>
             <div class="escalation-step">
-                <div class="escalation-icon">🏥</div>
+                <div class="escalation-icon"><svg width="32" height="32" viewBox="0 0 64 64" fill="none"><rect x="12" y="20" width="40" height="36" rx="2" stroke="#2DD4BF" stroke-width="3" fill="none"/><rect x="28" y="8" width="8" height="16" stroke="#2DD4BF" stroke-width="2" fill="none"/><line x1="32" y1="28" x2="32" y2="40" stroke="#2DD4BF" stroke-width="3"/><line x1="26" y1="34" x2="38" y2="34" stroke="#2DD4BF" stroke-width="3"/></svg></div>
                 <h4>Care Escalates</h4>
                 <p>24/7 nurse line, urgent care, or your direct intervention</p>
             </div>
             <div class="escalation-arrow">→</div>
             <div class="escalation-step">
-                <div class="escalation-icon">✅</div>
+                <div class="escalation-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#22c55e"/><path d="M8 12L11 15L16 9" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
                 <h4>Patient Stays Home</h4>
                 <p>The ER visit that didn't happen. The crisis averted.</p>
             </div>
@@ -5098,7 +5139,7 @@
         <div class="personas-grid">
             <div class="persona-card">
                 <div class="persona-header">
-                    <div class="persona-icon">👩‍⚕️</div>
+                    <div class="persona-icon"><svg width="32" height="32" viewBox="0 0 64 64" fill="none"><circle cx="32" cy="20" r="12" stroke="#2DD4BF" stroke-width="3" fill="none"/><path d="M12 56v-8a20 20 0 0140 0v8" stroke="#2DD4BF" stroke-width="3" fill="none"/><line x1="32" y1="14" x2="32" y2="26" stroke="#2DD4BF" stroke-width="2"/><line x1="26" y1="20" x2="38" y2="20" stroke="#2DD4BF" stroke-width="2"/></svg></div>
                     <div class="persona-title">
                         <h3>For the Care Manager</h3>
                         <span>RN, Care Coordinator, Case Manager</span>
@@ -5106,21 +5147,21 @@
                 </div>
                 <ul class="persona-benefits">
                     <li>
-                        <div class="benefit-check">✓</div>
+                        <div class="benefit-check"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#22c55e" stroke-width="2" fill="none"/><path d="M8 12L11 15L16 9" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
                         <div class="benefit-text">
                             <strong>Focus on Complex Cases</strong>
                             <span>Florence handles the routine 80% so you can focus on the 20% who need your expertise most.</span>
                         </div>
                     </li>
                     <li>
-                        <div class="benefit-check">✓</div>
+                        <div class="benefit-check"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#22c55e" stroke-width="2" fill="none"/><path d="M8 12L11 15L16 9" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
                         <div class="benefit-text">
                             <strong>24/7 Coverage Without Burnout</strong>
                             <span>Patients get check-ins at 3 AM. You get to sleep—and still know what happened.</span>
                         </div>
                     </li>
                     <li>
-                        <div class="benefit-check">✓</div>
+                        <div class="benefit-check"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#22c55e" stroke-width="2" fill="none"/><path d="M8 12L11 15L16 9" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
                         <div class="benefit-text">
                             <strong>Your Expertise, Amplified</strong>
                             <span>Florence learns your voice and style. It’s like having 20 assistants who know exactly how you work.</span>
@@ -5130,7 +5171,7 @@
             </div>
             <div class="persona-card">
                 <div class="persona-header">
-                    <div class="persona-icon">📊</div>
+                    <div class="persona-icon"><svg width="32" height="32" viewBox="0 0 64 64" fill="none"><rect x="8" y="28" width="12" height="28" rx="2" fill="#2DD4BF"/><rect x="26" y="16" width="12" height="40" rx="2" fill="#2DD4BF"/><rect x="44" y="8" width="12" height="48" rx="2" fill="#2DD4BF"/></svg></div>
                     <div class="persona-title">
                         <h3>For the Director</h3>
                         <span>VP of Care Management, Clinical Operations</span>
@@ -5138,21 +5179,21 @@
                 </div>
                 <ul class="persona-benefits">
                     <li>
-                        <div class="benefit-check">✓</div>
+                        <div class="benefit-check"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#22c55e" stroke-width="2" fill="none"/><path d="M8 12L11 15L16 9" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
                         <div class="benefit-text">
                             <strong>Scale Without Hiring</strong>
                             <span>Reach every patient in your panel without adding headcount. The math finally works.</span>
                         </div>
                     </li>
                     <li>
-                        <div class="benefit-check">✓</div>
+                        <div class="benefit-check"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#22c55e" stroke-width="2" fill="none"/><path d="M8 12L11 15L16 9" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
                         <div class="benefit-text">
                             <strong>Reduce Readmissions</strong>
                             <span>Proactive outreach catches problems before they become ER visits. 65% reduction in readmissions.</span>
                         </div>
                     </li>
                     <li>
-                        <div class="benefit-check">✓</div>
+                        <div class="benefit-check"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#22c55e" stroke-width="2" fill="none"/><path d="M8 12L11 15L16 9" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
                         <div class="benefit-text">
                             <strong>Retain Your Best People</strong>
                             <span>Care managers stay when they can actually do care management—not just triage.</span>
@@ -5170,12 +5211,12 @@
         </div>
         <div class="capabilities-grid">
             <div class="capability-card">
-                <div class="capability-icon">📞</div>
+                <div class="capability-icon"><svg width="48" height="48" viewBox="0 0 64 64" fill="none"><path d="M20 12C16 12 12 16 12 20C12 36 28 52 44 52C48 52 52 48 52 44L52 40C52 38 50 36 48 36L42 36C40 36 38 38 38 40L36 42C32 40 24 32 22 28L24 26C26 26 28 24 28 22L28 16C28 14 26 12 24 12L20 12Z" stroke="#2DD4BF" stroke-width="3" fill="none"/><path d="M36 12C36 12 44 14 50 20C56 26 58 34 58 34" stroke="#2DD4BF" stroke-width="3" stroke-linecap="round"/><path d="M36 22C36 22 40 24 44 28C48 32 50 36 50 36" stroke="#2DD4BF" stroke-width="3" stroke-linecap="round"/></svg></div>
                 <h4>Proactive Outreach</h4>
                 <p>AI-powered calls that reach patients before problems escalate. 24/7, in 20+ languages.</p>
             </div>
             <div class="capability-card">
-                <div class="capability-icon">⚠️</div>
+                <div class="capability-icon"><svg width="48" height="48" viewBox="0 0 64 64" fill="none"><path d="M32 8L4 56H60L32 8Z" stroke="#2DD4BF" stroke-width="3" fill="none" stroke-linejoin="round"/><line x1="32" y1="24" x2="32" y2="40" stroke="#2DD4BF" stroke-width="3" stroke-linecap="round"/><circle cx="32" cy="48" r="3" fill="#2DD4BF"/></svg></div>
                 <h4>Risk Detection</h4>
                 <p>Real-time sentiment and keyword analysis. Florence catches distress signals humans might miss.</p>
             </div>
@@ -5185,12 +5226,12 @@
                 <p>Every call documented in your EHR. No more after-hours charting.</p>
             </div>
             <div class="capability-card">
-                <div class="capability-icon">👥</div>
+                <div class="capability-icon"><svg width="48" height="48" viewBox="0 0 64 64" fill="none"><circle cx="24" cy="20" r="8" stroke="#2DD4BF" stroke-width="3" fill="none"/><path d="M8 52V46C8 40 15 36 24 36C33 36 40 40 40 46V52" stroke="#2DD4BF" stroke-width="3" fill="none"/><circle cx="44" cy="24" r="6" stroke="#2DD4BF" stroke-width="2" fill="none"/><path d="M44 36C50 36 56 40 56 44V48" stroke="#2DD4BF" stroke-width="2" fill="none"/></svg></div>
                 <h4>Caregiver Support</h4>
                 <p>Engage family members and caregivers. Keep the whole care team informed.</p>
             </div>
             <div class="capability-card">
-                <div class="capability-icon">🎯</div>
+                <div class="capability-icon"><svg width="48" height="48" viewBox="0 0 64 64" fill="none"><circle cx="32" cy="32" r="24" stroke="#2DD4BF" stroke-width="3" fill="none"/><circle cx="32" cy="32" r="16" stroke="#2DD4BF" stroke-width="2" fill="none"/><circle cx="32" cy="32" r="8" stroke="#2DD4BF" stroke-width="2" fill="none"/><circle cx="32" cy="32" r="3" fill="#2DD4BF"/></svg></div>
                 <h4>Care Gap Closure</h4>
                 <p>Identify and address HEDIS gaps, overdue screenings, and missed appointments.</p>
             </div>
@@ -5211,17 +5252,17 @@
         
         <div class="platform-grid">
             <div class="platform-card">
-                <div class="platform-icon">🏥</div>
+                <div class="platform-icon"><svg width="48" height="48" viewBox="0 0 64 64" fill="none"><rect x="12" y="20" width="40" height="36" rx="2" stroke="#2DD4BF" stroke-width="3" fill="none"/><rect x="28" y="8" width="8" height="16" stroke="#2DD4BF" stroke-width="2" fill="none"/><line x1="32" y1="28" x2="32" y2="40" stroke="#2DD4BF" stroke-width="3" stroke-linecap="round"/><line x1="26" y1="34" x2="38" y2="34" stroke="#2DD4BF" stroke-width="3" stroke-linecap="round"/></svg></div>
                 <h4>Works Where You Work</h4>
                 <p>Epic, Cerner, Athena—no new screens to learn</p>
             </div>
             <div class="platform-card">
-                <div class="platform-icon">📋</div>
+                <div class="platform-icon"><svg width="48" height="48" viewBox="0 0 64 64" fill="none"><rect x="12" y="12" width="40" height="44" rx="4" stroke="#2DD4BF" stroke-width="3" fill="none"/><rect x="24" y="6" width="16" height="12" rx="2" stroke="#2DD4BF" stroke-width="2" fill="none"/><line x1="20" y1="28" x2="44" y2="28" stroke="#2DD4BF" stroke-width="2" stroke-linecap="round"/><line x1="20" y1="38" x2="44" y2="38" stroke="#2DD4BF" stroke-width="2" stroke-linecap="round"/><line x1="20" y1="48" x2="36" y2="48" stroke="#2DD4BF" stroke-width="2" stroke-linecap="round"/></svg></div>
                 <h4>Fits Your Workflow</h4>
                 <p>Integrates with your existing tools and processes</p>
             </div>
             <div class="platform-card">
-                <div class="platform-icon">📊</div>
+                <div class="platform-icon"><svg width="48" height="48" viewBox="0 0 64 64" fill="none"><rect x="8" y="28" width="12" height="28" rx="2" fill="#2DD4BF"/><rect x="26" y="16" width="12" height="40" rx="2" fill="#2DD4BF"/><rect x="44" y="8" width="12" height="48" rx="2" fill="#2DD4BF"/></svg></div>
                 <h4>Knows Your Patients</h4>
                 <p>Risk stratification and population health built in</p>
             </div>
@@ -5242,25 +5283,25 @@
             
             <div class="security-grid">
                 <div class="security-card">
-                    <div class="security-icon">🔒</div>
+                    <div class="security-icon"><svg width="32" height="32" viewBox="0 0 64 64" fill="none"><rect x="16" y="28" width="32" height="28" rx="4" stroke="#2DD4BF" stroke-width="3" fill="none"/><path d="M24 28V20C24 14 28 8 32 8C36 8 40 14 40 20V28" stroke="#2DD4BF" stroke-width="3" fill="none"/><circle cx="32" cy="42" r="4" fill="#2DD4BF"/></svg></div>
                     <h4>HIPAA Compliant</h4>
                     <p>Full compliance with HIPAA Privacy and Security Rules. Regular third-party audits ensure ongoing adherence.</p>
                 </div>
                 
                 <div class="security-card">
-                    <div class="security-icon">🛡️</div>
+                    <div class="security-icon"><svg width="32" height="32" viewBox="0 0 64 64" fill="none"><path d="M32 4L56 14V32C56 46 44 56 32 60C20 56 8 46 8 32V14L32 4Z" stroke="#2DD4BF" stroke-width="3" fill="none"/><path d="M24 32L30 38L40 26" stroke="#2DD4BF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
                     <h4>End-to-End Encryption</h4>
                     <p>AES-256 encryption for data at rest and TLS 1.3 for data in transit. Your patient data is never exposed.</p>
                 </div>
                 
                 <div class="security-card">
-                    <div class="security-icon">📋</div>
+                    <div class="security-icon"><svg width="32" height="32" viewBox="0 0 64 64" fill="none"><rect x="12" y="12" width="40" height="44" rx="4" stroke="#2DD4BF" stroke-width="3" fill="none"/><rect x="24" y="6" width="16" height="12" rx="2" stroke="#2DD4BF" stroke-width="2" fill="none"/><line x1="20" y1="28" x2="44" y2="28" stroke="#2DD4BF" stroke-width="2"/><line x1="20" y1="38" x2="44" y2="38" stroke="#2DD4BF" stroke-width="2"/><line x1="20" y1="48" x2="36" y2="48" stroke="#2DD4BF" stroke-width="2"/></svg></div>
                     <h4>Complete Audit Trail</h4>
                     <p>Every interaction logged and traceable. Full transparency for compliance reviews and quality assurance.</p>
                 </div>
                 
                 <div class="security-card">
-                    <div class="security-icon">🏥</div>
+                    <div class="security-icon"><svg width="32" height="32" viewBox="0 0 64 64" fill="none"><rect x="12" y="20" width="40" height="36" rx="2" stroke="#2DD4BF" stroke-width="3" fill="none"/><rect x="28" y="8" width="8" height="16" stroke="#2DD4BF" stroke-width="2" fill="none"/><line x1="32" y1="28" x2="32" y2="40" stroke="#2DD4BF" stroke-width="3"/><line x1="26" y1="34" x2="38" y2="34" stroke="#2DD4BF" stroke-width="3"/></svg></div>
                     <h4>SOC 2 Type II</h4>
                     <p>Certified controls for security, availability, and confidentiality. Enterprise-ready from day one.</p>
                 </div>
@@ -5268,13 +5309,13 @@
             
             <div style="text-align: center; margin-top: 40px;">
                 <span class="hipaa-badge">
-                    <span>✓</span> HIPAA Compliant
+                    <span><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#22c55e" stroke-width="2" fill="none"/><path d="M8 12L11 15L16 9" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span> HIPAA Compliant
                 </span>
                 <span class="hipaa-badge" style="margin-left: 12px;">
-                    <span>✓</span> SOC 2 Type II
+                    <span><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#22c55e" stroke-width="2" fill="none"/><path d="M8 12L11 15L16 9" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span> SOC 2 Type II
                 </span>
                 <span class="hipaa-badge" style="margin-left: 12px;">
-                    <span>✓</span> BAA Available
+                    <span><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#22c55e" stroke-width="2" fill="none"/><path d="M8 12L11 15L16 9" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span> BAA Available
                 </span>
             </div>
         </div>
@@ -5380,7 +5421,7 @@
                         },
                         {
                                 "speaker": "SIGNAL",
-                                "text": "⚠️ SIGNAL: Chest pain — Patient reports chest tightness during activity yesterday, concerning for possible angina"
+                                "text": "<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 2L2 22H22L12 2Z" stroke="#EAB308" stroke-width="2" fill="none"/><line x1="12" y1="9" x2="12" y2="14" stroke="#EAB308" stroke-width="2"/><circle cx="12" cy="18" r="1" fill="#EAB308"/></svg> SIGNAL: Chest pain — Patient reports chest tightness during activity yesterday, concerning for possible angina"
                         },
                         {
                                 "speaker": "Florence",
@@ -5408,7 +5449,7 @@
                         },
                         {
                                 "speaker": "SIGNAL",
-                                "text": "⚠️ SIGNAL: Medication non-adherence — Patient missing evening metoprolol doses, confusion about catch-up dosing"
+                                "text": "<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 2L2 22H22L12 2Z" stroke="#EAB308" stroke-width="2" fill="none"/><line x1="12" y1="9" x2="12" y2="14" stroke="#EAB308" stroke-width="2"/><circle cx="12" cy="18" r="1" fill="#EAB308"/></svg> SIGNAL: Medication non-adherence — Patient missing evening metoprolol doses, confusion about catch-up dosing"
                         },
                         {
                                 "speaker": "Florence",
@@ -5428,7 +5469,7 @@
                         },
                         {
                                 "speaker": "SIGNAL",
-                                "text": "⚠️ SIGNAL: Shortness of breath — Worsening dyspnea on exertion and orthopnea, possible heart failure symptoms"
+                                "text": "<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 2L2 22H22L12 2Z" stroke="#EAB308" stroke-width="2" fill="none"/><line x1="12" y1="9" x2="12" y2="14" stroke="#EAB308" stroke-width="2"/><circle cx="12" cy="18" r="1" fill="#EAB308"/></svg> SIGNAL: Shortness of breath — Worsening dyspnea on exertion and orthopnea, possible heart failure symptoms"
                         },
                         {
                                 "speaker": "Florence",
@@ -5440,7 +5481,7 @@
                         },
                         {
                                 "speaker": "SIGNAL",
-                                "text": "⚠️ SIGNAL: Edema — New ankle swelling, concerning for fluid retention/heart failure"
+                                "text": "<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 2L2 22H22L12 2Z" stroke="#EAB308" stroke-width="2" fill="none"/><line x1="12" y1="9" x2="12" y2="14" stroke="#EAB308" stroke-width="2"/><circle cx="12" cy="18" r="1" fill="#EAB308"/></svg> SIGNAL: Edema — New ankle swelling, concerning for fluid retention/heart failure"
                         },
                         {
                                 "speaker": "Florence",
@@ -5452,7 +5493,7 @@
                         },
                         {
                                 "speaker": "SIGNAL",
-                                "text": "⚠️ SIGNAL: Diet non-compliance — Patient consuming high-sodium foods, may worsen fluid retention"
+                                "text": "<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 2L2 22H22L12 2Z" stroke="#EAB308" stroke-width="2" fill="none"/><line x1="12" y1="9" x2="12" y2="14" stroke="#EAB308" stroke-width="2"/><circle cx="12" cy="18" r="1" fill="#EAB308"/></svg> SIGNAL: Diet non-compliance — Patient consuming high-sodium foods, may worsen fluid retention"
                         },
                         {
                                 "speaker": "Florence",
@@ -5472,7 +5513,7 @@
                         },
                         {
                                 "speaker": "SIGNAL",
-                                "text": "⚠️ SIGNAL: Follow-up coordination — Patient may miss PCP appointment, needs care coordination"
+                                "text": "<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 2L2 22H22L12 2Z" stroke="#EAB308" stroke-width="2" fill="none"/><line x1="12" y1="9" x2="12" y2="14" stroke="#EAB308" stroke-width="2"/><circle cx="12" cy="18" r="1" fill="#EAB308"/></svg> SIGNAL: Follow-up coordination — Patient may miss PCP appointment, needs care coordination"
                         },
                         {
                                 "speaker": "Florence",
@@ -5566,7 +5607,7 @@
                         },
                         {
                                 "speaker": "SIGNAL",
-                                "text": "⚠️ SIGNAL: New vision changes — Patient reports new floaters in left eye since last contact"
+                                "text": "<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 2L2 22H22L12 2Z" stroke="#EAB308" stroke-width="2" fill="none"/><line x1="12" y1="9" x2="12" y2="14" stroke="#EAB308" stroke-width="2"/><circle cx="12" cy="18" r="1" fill="#EAB308"/></svg> SIGNAL: New vision changes — Patient reports new floaters in left eye since last contact"
                         },
                         {
                                 "speaker": "Florence",
@@ -5586,7 +5627,7 @@
                         },
                         {
                                 "speaker": "SIGNAL",
-                                "text": "⚠️ SIGNAL: Missed specialist appointment — Patient rescheduled retinal specialist visit, showing potential compliance issues"
+                                "text": "<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 2L2 22H22L12 2Z" stroke="#EAB308" stroke-width="2" fill="none"/><line x1="12" y1="9" x2="12" y2="14" stroke="#EAB308" stroke-width="2"/><circle cx="12" cy="18" r="1" fill="#EAB308"/></svg> SIGNAL: Missed specialist appointment — Patient rescheduled retinal specialist visit, showing potential compliance issues"
                         },
                         {
                                 "speaker": "Florence",
@@ -5598,7 +5639,7 @@
                         },
                         {
                                 "speaker": "SIGNAL",
-                                "text": "⚠️ SIGNAL: Elevated blood glucose — Patient reporting BG levels 180-195 mg/dL, above target range"
+                                "text": "<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 2L2 22H22L12 2Z" stroke="#EAB308" stroke-width="2" fill="none"/><line x1="12" y1="9" x2="12" y2="14" stroke="#EAB308" stroke-width="2"/><circle cx="12" cy="18" r="1" fill="#EAB308"/></svg> SIGNAL: Elevated blood glucose — Patient reporting BG levels 180-195 mg/dL, above target range"
                         },
                         {
                                 "speaker": "Florence",
@@ -5618,7 +5659,7 @@
                         },
                         {
                                 "speaker": "SIGNAL",
-                                "text": "⚠️ SIGNAL: Medication non-adherence — Patient missing Lantus insulin doses 2-3 times per week"
+                                "text": "<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 2L2 22H22L12 2Z" stroke="#EAB308" stroke-width="2" fill="none"/><line x1="12" y1="9" x2="12" y2="14" stroke="#EAB308" stroke-width="2"/><circle cx="12" cy="18" r="1" fill="#EAB308"/></svg> SIGNAL: Medication non-adherence — Patient missing Lantus insulin doses 2-3 times per week"
                         },
                         {
                                 "speaker": "Florence",
@@ -5630,7 +5671,7 @@
                         },
                         {
                                 "speaker": "SIGNAL",
-                                "text": "⚠️ SIGNAL: Elevated A1C — Patient reports A1C of 8.2%, above target of <7% for diabetic retinopathy management"
+                                "text": "<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 2L2 22H22L12 2Z" stroke="#EAB308" stroke-width="2" fill="none"/><line x1="12" y1="9" x2="12" y2="14" stroke="#EAB308" stroke-width="2"/><circle cx="12" cy="18" r="1" fill="#EAB308"/></svg> SIGNAL: Elevated A1C — Patient reports A1C of 8.2%, above target of <7% for diabetic retinopathy management"
                         },
                         {
                                 "speaker": "Florence",
@@ -5658,7 +5699,7 @@
                         },
                         {
                                 "speaker": "SIGNAL",
-                                "text": "⚠️ SIGNAL: Progressive vision impairment — Patient reports new difficulty reading and fuzzy vision, suggesting diabetic retinopathy progression"
+                                "text": "<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 2L2 22H22L12 2Z" stroke="#EAB308" stroke-width="2" fill="none"/><line x1="12" y1="9" x2="12" y2="14" stroke="#EAB308" stroke-width="2"/><circle cx="12" cy="18" r="1" fill="#EAB308"/></svg> SIGNAL: Progressive vision impairment — Patient reports new difficulty reading and fuzzy vision, suggesting diabetic retinopathy progression"
                         },
                         {
                                 "speaker": "Florence",
@@ -5740,7 +5781,7 @@
                         },
                         {
                                 "speaker": "SIGNAL",
-                                "text": "⚠️ SIGNAL: Irregular heartbeat — Patient reports nocturnal palpitations consistent with AFib episode"
+                                "text": "<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 2L2 22H22L12 2Z" stroke="#EAB308" stroke-width="2" fill="none"/><line x1="12" y1="9" x2="12" y2="14" stroke="#EAB308" stroke-width="2"/><circle cx="12" cy="18" r="1" fill="#EAB308"/></svg> SIGNAL: Irregular heartbeat — Patient reports nocturnal palpitations consistent with AFib episode"
                         },
                         {
                                 "speaker": "Florence",
@@ -5760,7 +5801,7 @@
                         },
                         {
                                 "speaker": "SIGNAL",
-                                "text": "⚠️ SIGNAL: Dizziness with position change — Possible orthostatic symptoms or hemodynamic instability"
+                                "text": "<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 2L2 22H22L12 2Z" stroke="#EAB308" stroke-width="2" fill="none"/><line x1="12" y1="9" x2="12" y2="14" stroke="#EAB308" stroke-width="2"/><circle cx="12" cy="18" r="1" fill="#EAB308"/></svg> SIGNAL: Dizziness with position change — Possible orthostatic symptoms or hemodynamic instability"
                         },
                         {
                                 "speaker": "Florence",
@@ -5780,7 +5821,7 @@
                         },
                         {
                                 "speaker": "SIGNAL",
-                                "text": "⚠️ SIGNAL: Rapid weight gain — 6 pounds over 2 days, suggesting fluid retention/CHF exacerbation"
+                                "text": "<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 2L2 22H22L12 2Z" stroke="#EAB308" stroke-width="2" fill="none"/><line x1="12" y1="9" x2="12" y2="14" stroke="#EAB308" stroke-width="2"/><circle cx="12" cy="18" r="1" fill="#EAB308"/></svg> SIGNAL: Rapid weight gain — 6 pounds over 2 days, suggesting fluid retention/CHF exacerbation"
                         },
                         {
                                 "speaker": "Florence",
@@ -5792,7 +5833,7 @@
                         },
                         {
                                 "speaker": "SIGNAL",
-                                "text": "⚠️ SIGNAL: Elevated blood pressure — BP 156/94 vs usual 130/80, despite beta-blocker therapy"
+                                "text": "<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 2L2 22H22L12 2Z" stroke="#EAB308" stroke-width="2" fill="none"/><line x1="12" y1="9" x2="12" y2="14" stroke="#EAB308" stroke-width="2"/><circle cx="12" cy="18" r="1" fill="#EAB308"/></svg> SIGNAL: Elevated blood pressure — BP 156/94 vs usual 130/80, despite beta-blocker therapy"
                         },
                         {
                                 "speaker": "Florence",
@@ -5804,7 +5845,7 @@
                         },
                         {
                                 "speaker": "SIGNAL",
-                                "text": "⚠️ SIGNAL: Fatigue and dyspnea on exertion — Decreased exercise tolerance suggesting cardiac decompensation"
+                                "text": "<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 2L2 22H22L12 2Z" stroke="#EAB308" stroke-width="2" fill="none"/><line x1="12" y1="9" x2="12" y2="14" stroke="#EAB308" stroke-width="2"/><circle cx="12" cy="18" r="1" fill="#EAB308"/></svg> SIGNAL: Fatigue and dyspnea on exertion — Decreased exercise tolerance suggesting cardiac decompensation"
                         },
                         {
                                 "speaker": "Florence",
@@ -5832,7 +5873,7 @@
                         },
                         {
                                 "speaker": "SIGNAL",
-                                "text": "⚠️ SIGNAL: Peripheral edema — Ankle swelling and tight shoes indicating fluid retention"
+                                "text": "<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 2L2 22H22L12 2Z" stroke="#EAB308" stroke-width="2" fill="none"/><line x1="12" y1="9" x2="12" y2="14" stroke="#EAB308" stroke-width="2"/><circle cx="12" cy="18" r="1" fill="#EAB308"/></svg> SIGNAL: Peripheral edema — Ankle swelling and tight shoes indicating fluid retention"
                         },
                         {
                                 "speaker": "Florence",
@@ -5914,7 +5955,7 @@
                         },
                         {
                                 "speaker": "SIGNAL",
-                                "text": "⚠️ SIGNAL: Edema — Patient reports ankle swelling, concerning for fluid retention"
+                                "text": "<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 2L2 22H22L12 2Z" stroke="#EAB308" stroke-width="2" fill="none"/><line x1="12" y1="9" x2="12" y2="14" stroke="#EAB308" stroke-width="2"/><circle cx="12" cy="18" r="1" fill="#EAB308"/></svg> SIGNAL: Edema — Patient reports ankle swelling, concerning for fluid retention"
                         },
                         {
                                 "speaker": "Florence",
@@ -5934,7 +5975,7 @@
                         },
                         {
                                 "speaker": "SIGNAL",
-                                "text": "⚠️ SIGNAL: Weight gain — 6 lb weight gain over approximately 5 days, significant for CHF monitoring"
+                                "text": "<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 2L2 22H22L12 2Z" stroke="#EAB308" stroke-width="2" fill="none"/><line x1="12" y1="9" x2="12" y2="14" stroke="#EAB308" stroke-width="2"/><circle cx="12" cy="18" r="1" fill="#EAB308"/></svg> SIGNAL: Weight gain — 6 lb weight gain over approximately 5 days, significant for CHF monitoring"
                         },
                         {
                                 "speaker": "Florence",
@@ -5946,11 +5987,11 @@
                         },
                         {
                                 "speaker": "SIGNAL",
-                                "text": "⚠️ SIGNAL: Orthopnea — Patient unable to sleep flat due to breathing difficulties"
+                                "text": "<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 2L2 22H22L12 2Z" stroke="#EAB308" stroke-width="2" fill="none"/><line x1="12" y1="9" x2="12" y2="14" stroke="#EAB308" stroke-width="2"/><circle cx="12" cy="18" r="1" fill="#EAB308"/></svg> SIGNAL: Orthopnea — Patient unable to sleep flat due to breathing difficulties"
                         },
                         {
                                 "speaker": "SIGNAL",
-                                "text": "⚠️ SIGNAL: Shortness of breath — Dyspnea on minimal exertion (walking short distances)"
+                                "text": "<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 2L2 22H22L12 2Z" stroke="#EAB308" stroke-width="2" fill="none"/><line x1="12" y1="9" x2="12" y2="14" stroke="#EAB308" stroke-width="2"/><circle cx="12" cy="18" r="1" fill="#EAB308"/></svg> SIGNAL: Shortness of breath — Dyspnea on minimal exertion (walking short distances)"
                         },
                         {
                                 "speaker": "Florence",
@@ -5970,7 +6011,7 @@
                         },
                         {
                                 "speaker": "SIGNAL",
-                                "text": "⚠️ SIGNAL: High sodium intake — Patient consumed restaurant/takeout foods likely high in sodium"
+                                "text": "<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 2L2 22H22L12 2Z" stroke="#EAB308" stroke-width="2" fill="none"/><line x1="12" y1="9" x2="12" y2="14" stroke="#EAB308" stroke-width="2"/><circle cx="12" cy="18" r="1" fill="#EAB308"/></svg> SIGNAL: High sodium intake — Patient consumed restaurant/takeout foods likely high in sodium"
                         },
                         {
                                 "speaker": "Florence",
@@ -6084,7 +6125,7 @@
                         },
                         {
                                 "speaker": "SIGNAL",
-                                "text": "⚠️ SIGNAL: Low oxygen saturation — Patient reports SpO2 of 89% on 2L O2, below target range"
+                                "text": "<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 2L2 22H22L12 2Z" stroke="#EAB308" stroke-width="2" fill="none"/><line x1="12" y1="9" x2="12" y2="14" stroke="#EAB308" stroke-width="2"/><circle cx="12" cy="18" r="1" fill="#EAB308"/></svg> SIGNAL: Low oxygen saturation — Patient reports SpO2 of 89% on 2L O2, below target range"
                         },
                         {
                                 "speaker": "Florence",
@@ -6104,7 +6145,7 @@
                         },
                         {
                                 "speaker": "SIGNAL",
-                                "text": "⚠️ SIGNAL: Excessive rescue inhaler use — Patient using albuterol 4-5 times daily, indicating poor control"
+                                "text": "<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 2L2 22H22L12 2Z" stroke="#EAB308" stroke-width="2" fill="none"/><line x1="12" y1="9" x2="12" y2="14" stroke="#EAB308" stroke-width="2"/><circle cx="12" cy="18" r="1" fill="#EAB308"/></svg> SIGNAL: Excessive rescue inhaler use — Patient using albuterol 4-5 times daily, indicating poor control"
                         },
                         {
                                 "speaker": "Florence",
@@ -6124,7 +6165,7 @@
                         },
                         {
                                 "speaker": "SIGNAL",
-                                "text": "⚠️ SIGNAL: Improper inhaler technique — Patient not shaking inhaler or exhaling fully before use"
+                                "text": "<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 2L2 22H22L12 2Z" stroke="#EAB308" stroke-width="2" fill="none"/><line x1="12" y1="9" x2="12" y2="14" stroke="#EAB308" stroke-width="2"/><circle cx="12" cy="18" r="1" fill="#EAB308"/></svg> SIGNAL: Improper inhaler technique — Patient not shaking inhaler or exhaling fully before use"
                         },
                         {
                                 "speaker": "Florence",
@@ -6136,7 +6177,7 @@
                         },
                         {
                                 "speaker": "SIGNAL",
-                                "text": "⚠️ SIGNAL: Early exacerbation symptoms — Increased cough with yellow-green sputum production"
+                                "text": "<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 2L2 22H22L12 2Z" stroke="#EAB308" stroke-width="2" fill="none"/><line x1="12" y1="9" x2="12" y2="14" stroke="#EAB308" stroke-width="2"/><circle cx="12" cy="18" r="1" fill="#EAB308"/></svg> SIGNAL: Early exacerbation symptoms — Increased cough with yellow-green sputum production"
                         },
                         {
                                 "speaker": "Florence",
@@ -6148,7 +6189,7 @@
                         },
                         {
                                 "speaker": "SIGNAL",
-                                "text": "⚠️ SIGNAL: Continued smoking — Patient still smoking 3-4 cigarettes daily despite COPD diagnosis"
+                                "text": "<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 2L2 22H22L12 2Z" stroke="#EAB308" stroke-width="2" fill="none"/><line x1="12" y1="9" x2="12" y2="14" stroke="#EAB308" stroke-width="2"/><circle cx="12" cy="18" r="1" fill="#EAB308"/></svg> SIGNAL: Continued smoking — Patient still smoking 3-4 cigarettes daily despite COPD diagnosis"
                         },
                         {
                                 "speaker": "Florence",
@@ -6168,7 +6209,7 @@
                         },
                         {
                                 "speaker": "SIGNAL",
-                                "text": "⚠️ SIGNAL: Severe activity limitation — Patient unable to perform basic ADLs without significant dyspnea"
+                                "text": "<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 2L2 22H22L12 2Z" stroke="#EAB308" stroke-width="2" fill="none"/><line x1="12" y1="9" x2="12" y2="14" stroke="#EAB308" stroke-width="2"/><circle cx="12" cy="18" r="1" fill="#EAB308"/></svg> SIGNAL: Severe activity limitation — Patient unable to perform basic ADLs without significant dyspnea"
                         },
                         {
                                 "speaker": "Florence",
@@ -6254,7 +6295,7 @@
                         },
                         {
                                 "speaker": "SIGNAL",
-                                "text": "⚠️ SIGNAL: Wandering risk — Patient attempting to leave home at night, safety concern"
+                                "text": "<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 2L2 22H22L12 2Z" stroke="#EAB308" stroke-width="2" fill="none"/><line x1="12" y1="9" x2="12" y2="14" stroke="#EAB308" stroke-width="2"/><circle cx="12" cy="18" r="1" fill="#EAB308"/></svg> SIGNAL: Wandering risk — Patient attempting to leave home at night, safety concern"
                         },
                         {
                                 "speaker": "Florence",
@@ -6266,7 +6307,7 @@
                         },
                         {
                                 "speaker": "SIGNAL",
-                                "text": "⚠️ SIGNAL: Caregiver burnout — Sleep deprivation, missing work, emotional exhaustion"
+                                "text": "<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 2L2 22H22L12 2Z" stroke="#EAB308" stroke-width="2" fill="none"/><line x1="12" y1="9" x2="12" y2="14" stroke="#EAB308" stroke-width="2"/><circle cx="12" cy="18" r="1" fill="#EAB308"/></svg> SIGNAL: Caregiver burnout — Sleep deprivation, missing work, emotional exhaustion"
                         },
                         {
                                 "speaker": "Florence",
@@ -6286,7 +6327,7 @@
                         },
                         {
                                 "speaker": "SIGNAL",
-                                "text": "⚠️ SIGNAL: Medication non-compliance — Patient refusing medications, potential paranoid ideation"
+                                "text": "<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 2L2 22H22L12 2Z" stroke="#EAB308" stroke-width="2" fill="none"/><line x1="12" y1="9" x2="12" y2="14" stroke="#EAB308" stroke-width="2"/><circle cx="12" cy="18" r="1" fill="#EAB308"/></svg> SIGNAL: Medication non-compliance — Patient refusing medications, potential paranoid ideation"
                         },
                         {
                                 "speaker": "Florence",
@@ -6306,7 +6347,7 @@
                         },
                         {
                                 "speaker": "SIGNAL",
-                                "text": "⚠️ SIGNAL: Behavioral changes — Sundowning, increased agitation, reality orientation issues"
+                                "text": "<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 2L2 22H22L12 2Z" stroke="#EAB308" stroke-width="2" fill="none"/><line x1="12" y1="9" x2="12" y2="14" stroke="#EAB308" stroke-width="2"/><circle cx="12" cy="18" r="1" fill="#EAB308"/></svg> SIGNAL: Behavioral changes — Sundowning, increased agitation, reality orientation issues"
                         },
                         {
                                 "speaker": "Florence",
@@ -6326,7 +6367,7 @@
                         },
                         {
                                 "speaker": "SIGNAL",
-                                "text": "⚠️ SIGNAL: Respite care needs — Caregiver isolation, financial stress, needs immediate support"
+                                "text": "<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 2L2 22H22L12 2Z" stroke="#EAB308" stroke-width="2" fill="none"/><line x1="12" y1="9" x2="12" y2="14" stroke="#EAB308" stroke-width="2"/><circle cx="12" cy="18" r="1" fill="#EAB308"/></svg> SIGNAL: Respite care needs — Caregiver isolation, financial stress, needs immediate support"
                         },
                         {
                                 "speaker": "Florence",
@@ -6362,7 +6403,7 @@
                         },
                         {
                                 "speaker": "SIGNAL",
-                                "text": "⚠️ SIGNAL: Limited support system — Primary caregiver isolated, family members unable to help"
+                                "text": "<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 2L2 22H22L12 2Z" stroke="#EAB308" stroke-width="2" fill="none"/><line x1="12" y1="9" x2="12" y2="14" stroke="#EAB308" stroke-width="2"/><circle cx="12" cy="18" r="1" fill="#EAB308"/></svg> SIGNAL: Limited support system — Primary caregiver isolated, family members unable to help"
                         },
                         {
                                 "speaker": "Florence",
@@ -6436,7 +6477,7 @@
                         },
                         {
                                 "speaker": "SIGNAL",
-                                "text": "⚠️ SIGNAL: Elevated blood glucose readings — Patient reporting consistent readings around 200+ mg/dL"
+                                "text": "<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 2L2 22H22L12 2Z" stroke="#EAB308" stroke-width="2" fill="none"/><line x1="12" y1="9" x2="12" y2="14" stroke="#EAB308" stroke-width="2"/><circle cx="12" cy="18" r="1" fill="#EAB308"/></svg> SIGNAL: Elevated blood glucose readings — Patient reporting consistent readings around 200+ mg/dL"
                         },
                         {
                                 "speaker": "Florence",
@@ -6456,7 +6497,7 @@
                         },
                         {
                                 "speaker": "SIGNAL",
-                                "text": "⚠️ SIGNAL: Medication non-adherence — Patient inconsistently taking rapid-acting insulin at meals"
+                                "text": "<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 2L2 22H22L12 2Z" stroke="#EAB308" stroke-width="2" fill="none"/><line x1="12" y1="9" x2="12" y2="14" stroke="#EAB308" stroke-width="2"/><circle cx="12" cy="18" r="1" fill="#EAB308"/></svg> SIGNAL: Medication non-adherence — Patient inconsistently taking rapid-acting insulin at meals"
                         },
                         {
                                 "speaker": "Florence",
@@ -6468,7 +6509,7 @@
                         },
                         {
                                 "speaker": "SIGNAL",
-                                "text": "⚠️ SIGNAL: Hypoglycemia episode — Recent symptomatic low blood sugar event in public setting"
+                                "text": "<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 2L2 22H22L12 2Z" stroke="#EAB308" stroke-width="2" fill="none"/><line x1="12" y1="9" x2="12" y2="14" stroke="#EAB308" stroke-width="2"/><circle cx="12" cy="18" r="1" fill="#EAB308"/></svg> SIGNAL: Hypoglycemia episode — Recent symptomatic low blood sugar event in public setting"
                         },
                         {
                                 "speaker": "Florence",
@@ -6488,7 +6529,7 @@
                         },
                         {
                                 "speaker": "SIGNAL",
-                                "text": "⚠️ SIGNAL: Poor dietary adherence — Recent loss affecting meal planning, relying on processed/takeout foods"
+                                "text": "<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 2L2 22H22L12 2Z" stroke="#EAB308" stroke-width="2" fill="none"/><line x1="12" y1="9" x2="12" y2="14" stroke="#EAB308" stroke-width="2"/><circle cx="12" cy="18" r="1" fill="#EAB308"/></svg> SIGNAL: Poor dietary adherence — Recent loss affecting meal planning, relying on processed/takeout foods"
                         },
                         {
                                 "speaker": "Florence",
@@ -6508,7 +6549,7 @@
                         },
                         {
                                 "speaker": "SIGNAL",
-                                "text": "⚠️ SIGNAL: Diabetic neuropathy symptoms — Patient reporting foot numbness, not performing regular foot inspections"
+                                "text": "<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 2L2 22H22L12 2Z" stroke="#EAB308" stroke-width="2" fill="none"/><line x1="12" y1="9" x2="12" y2="14" stroke="#EAB308" stroke-width="2"/><circle cx="12" cy="18" r="1" fill="#EAB308"/></svg> SIGNAL: Diabetic neuropathy symptoms — Patient reporting foot numbness, not performing regular foot inspections"
                         },
                         {
                                 "speaker": "Florence",
@@ -6602,7 +6643,7 @@
                         },
                         {
                                 "speaker": "SIGNAL",
-                                "text": "⚠️ SIGNAL: Weight gain >2lbs — Patient reports 188 lbs, 3 lbs above target weight of 185 lbs"
+                                "text": "<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 2L2 22H22L12 2Z" stroke="#EAB308" stroke-width="2" fill="none"/><line x1="12" y1="9" x2="12" y2="14" stroke="#EAB308" stroke-width="2"/><circle cx="12" cy="18" r="1" fill="#EAB308"/></svg> SIGNAL: Weight gain >2lbs — Patient reports 188 lbs, 3 lbs above target weight of 185 lbs"
                         },
                         {
                                 "speaker": "Florence",
@@ -6614,7 +6655,7 @@
                         },
                         {
                                 "speaker": "SIGNAL",
-                                "text": "⚠️ SIGNAL: Edema symptoms — Patient reports tight shoes and difficulty removing wedding ring, suggesting fluid retention"
+                                "text": "<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 2L2 22H22L12 2Z" stroke="#EAB308" stroke-width="2" fill="none"/><line x1="12" y1="9" x2="12" y2="14" stroke="#EAB308" stroke-width="2"/><circle cx="12" cy="18" r="1" fill="#EAB308"/></svg> SIGNAL: Edema symptoms — Patient reports tight shoes and difficulty removing wedding ring, suggesting fluid retention"
                         },
                         {
                                 "speaker": "Florence",
@@ -6626,7 +6667,7 @@
                         },
                         {
                                 "speaker": "SIGNAL",
-                                "text": "⚠️ SIGNAL: Shortness of breath — Patient reports orthopnea (extra pillow needed) and exertional dyspnea"
+                                "text": "<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 2L2 22H22L12 2Z" stroke="#EAB308" stroke-width="2" fill="none"/><line x1="12" y1="9" x2="12" y2="14" stroke="#EAB308" stroke-width="2"/><circle cx="12" cy="18" r="1" fill="#EAB308"/></svg> SIGNAL: Shortness of breath — Patient reports orthopnea (extra pillow needed) and exertional dyspnea"
                         },
                         {
                                 "speaker": "Florence",
@@ -6638,7 +6679,7 @@
                         },
                         {
                                 "speaker": "SIGNAL",
-                                "text": "⚠️ SIGNAL: Diuretic non-compliance — Patient missed dose yesterday, took late, and skipped this morning's dose"
+                                "text": "<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 2L2 22H22L12 2Z" stroke="#EAB308" stroke-width="2" fill="none"/><line x1="12" y1="9" x2="12" y2="14" stroke="#EAB308" stroke-width="2"/><circle cx="12" cy="18" r="1" fill="#EAB308"/></svg> SIGNAL: Diuretic non-compliance — Patient missed dose yesterday, took late, and skipped this morning's dose"
                         },
                         {
                                 "speaker": "Florence",
@@ -6658,7 +6699,7 @@
                         },
                         {
                                 "speaker": "SIGNAL",
-                                "text": "⚠️ SIGNAL: High sodium intake — Patient consumed Chinese takeout and canned soup, both high in sodium"
+                                "text": "<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 2L2 22H22L12 2Z" stroke="#EAB308" stroke-width="2" fill="none"/><line x1="12" y1="9" x2="12" y2="14" stroke="#EAB308" stroke-width="2"/><circle cx="12" cy="18" r="1" fill="#EAB308"/></svg> SIGNAL: High sodium intake — Patient consumed Chinese takeout and canned soup, both high in sodium"
                         },
                         {
                                 "speaker": "Florence",
@@ -6670,7 +6711,7 @@
                         },
                         {
                                 "speaker": "SIGNAL",
-                                "text": "⚠️ SIGNAL: Excessive fluid intake — Patient reports 10-12 glasses water plus additional beverages, likely exceeding 2L daily limit"
+                                "text": "<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 2L2 22H22L12 2Z" stroke="#EAB308" stroke-width="2" fill="none"/><line x1="12" y1="9" x2="12" y2="14" stroke="#EAB308" stroke-width="2"/><circle cx="12" cy="18" r="1" fill="#EAB308"/></svg> SIGNAL: Excessive fluid intake — Patient reports 10-12 glasses water plus additional beverages, likely exceeding 2L daily limit"
                         },
                         {
                                 "speaker": "Florence",
@@ -6820,7 +6861,7 @@
                         },
                         {
                                 "speaker": "SIGNAL",
-                                "text": "⚠️ SIGNAL: Medication adherence uncertainty — Patient unsure about medication compliance, relies on daughter"
+                                "text": "<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 2L2 22H22L12 2Z" stroke="#EAB308" stroke-width="2" fill="none"/><line x1="12" y1="9" x2="12" y2="14" stroke="#EAB308" stroke-width="2"/><circle cx="12" cy="18" r="1" fill="#EAB308"/></svg> SIGNAL: Medication adherence uncertainty — Patient unsure about medication compliance, relies on daughter"
                         },
                         {
                                 "speaker": "Florence",
@@ -6848,7 +6889,7 @@
                         },
                         {
                                 "speaker": "SIGNAL",
-                                "text": "⚠️ SIGNAL: Family support dependency — Limited family availability, missed morning medications"
+                                "text": "<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 2L2 22H22L12 2Z" stroke="#EAB308" stroke-width="2" fill="none"/><line x1="12" y1="9" x2="12" y2="14" stroke="#EAB308" stroke-width="2"/><circle cx="12" cy="18" r="1" fill="#EAB308"/></svg> SIGNAL: Family support dependency — Limited family availability, missed morning medications"
                         },
                         {
                                 "speaker": "Florence",
@@ -6860,7 +6901,7 @@
                         },
                         {
                                 "speaker": "SIGNAL",
-                                "text": "⚠️ SIGNAL: CHF symptoms present — Dyspnea on exertion and pedal edema reported"
+                                "text": "<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 2L2 22H22L12 2Z" stroke="#EAB308" stroke-width="2" fill="none"/><line x1="12" y1="9" x2="12" y2="14" stroke="#EAB308" stroke-width="2"/><circle cx="12" cy="18" r="1" fill="#EAB308"/></svg> SIGNAL: CHF symptoms present — Dyspnea on exertion and pedal edema reported"
                         },
                         {
                                 "speaker": "Florence",
@@ -6888,7 +6929,7 @@
                         },
                         {
                                 "speaker": "SIGNAL",
-                                "text": "⚠️ SIGNAL: Diet non-adherence — Difficulty following low-sodium diet, cultural food preferences"
+                                "text": "<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 2L2 22H22L12 2Z" stroke="#EAB308" stroke-width="2" fill="none"/><line x1="12" y1="9" x2="12" y2="14" stroke="#EAB308" stroke-width="2"/><circle cx="12" cy="18" r="1" fill="#EAB308"/></svg> SIGNAL: Diet non-adherence — Difficulty following low-sodium diet, cultural food preferences"
                         },
                         {
                                 "speaker": "Florence",
@@ -6916,7 +6957,7 @@
                         },
                         {
                                 "speaker": "SIGNAL",
-                                "text": "⚠️ SIGNAL: Transportation barriers — Uncertain about getting to follow-up appointment"
+                                "text": "<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 2L2 22H22L12 2Z" stroke="#EAB308" stroke-width="2" fill="none"/><line x1="12" y1="9" x2="12" y2="14" stroke="#EAB308" stroke-width="2"/><circle cx="12" cy="18" r="1" fill="#EAB308"/></svg> SIGNAL: Transportation barriers — Uncertain about getting to follow-up appointment"
                         },
                         {
                                 "speaker": "Florence",
@@ -6936,7 +6977,7 @@
                         },
                         {
                                 "speaker": "SIGNAL",
-                                "text": "⚠️ SIGNAL: Warning signs knowledge gap — Limited understanding of when to seek emergency care"
+                                "text": "<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 2L2 22H22L12 2Z" stroke="#EAB308" stroke-width="2" fill="none"/><line x1="12" y1="9" x2="12" y2="14" stroke="#EAB308" stroke-width="2"/><circle cx="12" cy="18" r="1" fill="#EAB308"/></svg> SIGNAL: Warning signs knowledge gap — Limited understanding of when to seek emergency care"
                         },
                         {
                                 "speaker": "Florence",
@@ -7006,7 +7047,7 @@
                         },
                         {
                                 "speaker": "SIGNAL",
-                                "text": "⚠️ SIGNAL: Elevated Blood Pressure — Patient reports BP 180/? with morning headaches, concerning for uncontrolled hypertension"
+                                "text": "<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 2L2 22H22L12 2Z" stroke="#EAB308" stroke-width="2" fill="none"/><line x1="12" y1="9" x2="12" y2="14" stroke="#EAB308" stroke-width="2"/><circle cx="12" cy="18" r="1" fill="#EAB308"/></svg> SIGNAL: Elevated Blood Pressure — Patient reports BP 180/? with morning headaches, concerning for uncontrolled hypertension"
                         },
                         {
                                 "speaker": "Florence",
@@ -7026,7 +7067,7 @@
                         },
                         {
                                 "speaker": "SIGNAL",
-                                "text": "⚠️ SIGNAL: Poor Medication Adherence — Missing medications 3-4 times weekly, affecting both diabetes and hypertension control"
+                                "text": "<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 2L2 22H22L12 2Z" stroke="#EAB308" stroke-width="2" fill="none"/><line x1="12" y1="9" x2="12" y2="14" stroke="#EAB308" stroke-width="2"/><circle cx="12" cy="18" r="1" fill="#EAB308"/></svg> SIGNAL: Poor Medication Adherence — Missing medications 3-4 times weekly, affecting both diabetes and hypertension control"
                         },
                         {
                                 "speaker": "Florence",
@@ -7038,7 +7079,7 @@
                         },
                         {
                                 "speaker": "SIGNAL",
-                                "text": "⚠️ SIGNAL: Uncontrolled Blood Glucose — Blood sugar at 15 mmol/L (270 mg/dL), significantly elevated"
+                                "text": "<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 2L2 22H22L12 2Z" stroke="#EAB308" stroke-width="2" fill="none"/><line x1="12" y1="9" x2="12" y2="14" stroke="#EAB308" stroke-width="2"/><circle cx="12" cy="18" r="1" fill="#EAB308"/></svg> SIGNAL: Uncontrolled Blood Glucose — Blood sugar at 15 mmol/L (270 mg/dL), significantly elevated"
                         },
                         {
                                 "speaker": "Florence",
@@ -7058,7 +7099,7 @@
                         },
                         {
                                 "speaker": "SIGNAL",
-                                "text": "⚠️ SIGNAL: Diabetic Symptoms — Polydipsia and polyuria present, indicating poor glycemic control"
+                                "text": "<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 2L2 22H22L12 2Z" stroke="#EAB308" stroke-width="2" fill="none"/><line x1="12" y1="9" x2="12" y2="14" stroke="#EAB308" stroke-width="2"/><circle cx="12" cy="18" r="1" fill="#EAB308"/></svg> SIGNAL: Diabetic Symptoms — Polydipsia and polyuria present, indicating poor glycemic control"
                         },
                         {
                                 "speaker": "Florence",
@@ -7086,7 +7127,7 @@
                         },
                         {
                                 "speaker": "SIGNAL",
-                                "text": "⚠️ SIGNAL: Healthcare Access Barriers — Social isolation, transportation issues, 3 months since last medical visit"
+                                "text": "<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 2L2 22H22L12 2Z" stroke="#EAB308" stroke-width="2" fill="none"/><line x1="12" y1="9" x2="12" y2="14" stroke="#EAB308" stroke-width="2"/><circle cx="12" cy="18" r="1" fill="#EAB308"/></svg> SIGNAL: Healthcare Access Barriers — Social isolation, transportation issues, 3 months since last medical visit"
                         },
                         {
                                 "speaker": "Florence",
@@ -7114,7 +7155,7 @@
                         },
                         {
                                 "speaker": "SIGNAL",
-                                "text": "⚠️ SIGNAL: Social Support Need — Patient expresses relief at having healthcare contact, indicating isolation"
+                                "text": "<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 2L2 22H22L12 2Z" stroke="#EAB308" stroke-width="2" fill="none"/><line x1="12" y1="9" x2="12" y2="14" stroke="#EAB308" stroke-width="2"/><circle cx="12" cy="18" r="1" fill="#EAB308"/></svg> SIGNAL: Social Support Need — Patient expresses relief at having healthcare contact, indicating isolation"
                         },
                         {
                                 "speaker": "Florence",
@@ -7161,7 +7202,7 @@
             let transcriptHtml = '';
             call.transcript.forEach(entry => {
                 if (entry.speaker === 'SIGNAL') {
-                    transcriptHtml += '<div class="transcript-signal"><span class="signal-icon">⚠️ SIGNAL</span><br>' + entry.text + '</div>';
+                    transcriptHtml += '<div class="transcript-signal"><span class="signal-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 2L2 22H22L12 2Z" stroke="#EAB308" stroke-width="2" fill="none"/><line x1="12" y1="9" x2="12" y2="14" stroke="#EAB308" stroke-width="2"/><circle cx="12" cy="18" r="1" fill="#EAB308"/></svg> SIGNAL</span><br>' + entry.text + '</div>';
                 } else {
                     transcriptHtml += '<div class="transcript-entry"><span class="transcript-speaker ' + entry.speaker.toLowerCase() + '">' + entry.speaker + '</span><div class="transcript-text">' + entry.text + '</div></div>';
                 }
@@ -7185,7 +7226,7 @@
                 <div class="atc-transcript-preview">${transcriptHtml}</div>
                 <div class="atc-card-footer">
                     <span class="atc-call-type">${call.type}</span>
-                    <button class="atc-monitor-btn" onclick="alert('Opening full call view for ${call.name}')">${call.status === 'ESCALATED' ? '🚨 Join Now' : 'Monitor'}</button>
+                    <button class="atc-monitor-btn" onclick="alert('Opening full call view for ${call.name}')">${call.status === 'ESCALATED' ? '<svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#EF4444" stroke-width="2" fill="none"/><line x1="12" y1="8" x2="12" y2="12" stroke="#EF4444" stroke-width="2"/><circle cx="12" cy="16" r="1" fill="#EF4444"/></svg> Join Now' : 'Monitor'}</button>
                 </div>
             `;
             
@@ -7238,7 +7279,7 @@
         // Start call simulation
         function startCall(type) {
             const transcriptContainer = document.getElementById('transcriptContainer');
-            transcriptContainer.innerHTML = '<div class="transcript-entry system">📞 Calling Jane Doe...</div>';
+            transcriptContainer.innerHTML = '<div class="transcript-entry system"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91" stroke="currentColor" stroke-width="2" fill="none"/></svg> Calling Jane Doe...</div>';
             
             // Switch to transcript tab
             switchTab('transcript');
@@ -7246,7 +7287,7 @@
             document.querySelectorAll('.florence-tab')[1].classList.add('active');
             
             setTimeout(() => {
-                transcriptContainer.innerHTML += '<div class="transcript-entry system">✅ Call connected. Florence is listening...</div>';
+                transcriptContainer.innerHTML += '<div class="transcript-entry system"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#22c55e"/><path d="M8 12L11 15L16 9" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Call connected. Florence is listening...</div>';
                 simulateTranscript(type);
             }, 1500);
         }
@@ -7257,18 +7298,18 @@
                 'tcm': [
                     { speaker: 'care-manager', name: 'David Brooks, RN', text: 'Hi Mrs. Doe, this is David from your care team. How are you feeling today?' },
                     { speaker: 'patient', name: 'Jane Doe', text: 'Oh hello David. I\'m doing okay, a little tired but managing.' },
-                    { speaker: 'florence', name: 'Florence AI', text: '📝 Fatigue noted — monitoring for CHF symptom progression', isSignal: true },
+                    { speaker: 'florence', name: 'Florence AI', text: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z" stroke="currentColor" stroke-width="2" fill="none"/></svg> Fatigue noted — monitoring for CHF symptom progression', isSignal: true },
                     { speaker: 'care-manager', name: 'David Brooks, RN', text: 'I understand. Have you noticed any shortness of breath or swelling in your legs?' },
                     { speaker: 'patient', name: 'Jane Doe', text: 'My feet have been swelling a bit, especially in the evenings.' },
-                    { speaker: 'florence', name: 'Florence AI', text: '⚠️ SIGNAL: Edema detected — diuretic adjustment may be needed', isSignal: true },
+                    { speaker: 'florence', name: 'Florence AI', text: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 2L2 22H22L12 2Z" stroke="#EAB308" stroke-width="2" fill="none"/><line x1="12" y1="9" x2="12" y2="14" stroke="#EAB308" stroke-width="2"/><circle cx="12" cy="18" r="1" fill="#EAB308"/></svg> SIGNAL: Edema detected — diuretic adjustment may be needed', isSignal: true },
                     { speaker: 'care-manager', name: 'David Brooks, RN', text: 'Thank you for letting me know. Are you taking all your medications as prescribed?' },
                     { speaker: 'patient', name: 'Jane Doe', text: 'Well, I ran out of my blue pills a few days ago. I kept meaning to call for a refill...' },
-                    { speaker: 'florence', name: 'Florence AI', text: '⚠️ SIGNAL: Adherence gap + refill needed [Lisinopril] — 2nd gap this quarter', isSignal: true },
+                    { speaker: 'florence', name: 'Florence AI', text: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 2L2 22H22L12 2Z" stroke="#EAB308" stroke-width="2" fill="none"/><line x1="12" y1="9" x2="12" y2="14" stroke="#EAB308" stroke-width="2"/><circle cx="12" cy="18" r="1" fill="#EAB308"/></svg> SIGNAL: Adherence gap + refill needed [Lisinopril] — 2nd gap this quarter', isSignal: true },
                     { speaker: 'care-manager', name: 'David Brooks, RN', text: 'I\'ll make sure we get that refill sent over today. How about your other medications?' },
                     { speaker: 'patient', name: 'Jane Doe', text: 'Those I\'ve been taking. Oh, and my daughter moved away last month so I\'ve been a bit lonely.' },
-                    { speaker: 'florence', name: 'Florence AI', text: '📝 Social isolation noted — depression screening recommended', isSignal: true },
+                    { speaker: 'florence', name: 'Florence AI', text: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z" stroke="currentColor" stroke-width="2" fill="none"/></svg> Social isolation noted — depression screening recommended', isSignal: true },
                     { speaker: 'care-manager', name: 'David Brooks, RN', text: 'I\'m sorry to hear that. We have some resources that might help. Let\'s also schedule your PCP follow-up.' },
-                    { speaker: 'system', name: 'System', text: '✅ Call completed. Documentation generated.' }
+                    { speaker: 'system', name: 'System', text: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#22c55e"/><path d="M8 12L11 15L16 9" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Call completed. Documentation generated.' }
                 ]
             };
             
@@ -7289,7 +7330,7 @@
                 entryDiv.className = `transcript-entry ${entry.speaker} ${entry.isSignal ? 'signal' : ''}`;
                 entryDiv.innerHTML = `
                     <div class="transcript-speaker ${entry.speaker === 'florence' ? 'florence-ai' : entry.speaker === 'care-manager' ? 'cm' : 'patient-speaker'}">
-                        ${entry.speaker === 'florence' ? '🤖 ' : entry.speaker === 'care-manager' ? '👤 ' : entry.speaker === 'patient' ? '🧑 ' : '📱 '}${entry.name}
+                        ${entry.speaker === 'florence' ? '<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect x="4" y="4" width="16" height="16" rx="2" stroke="currentColor" stroke-width="2" fill="none"/><circle cx="9" cy="10" r="1" fill="currentColor"/><circle cx="15" cy="10" r="1" fill="currentColor"/><path d="M9 15h6" stroke="currentColor" stroke-width="2"/></svg> ' : entry.speaker === 'care-manager' ? '<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="2" fill="none"/><path d="M4 20v-2a8 8 0 0116 0v2" stroke="currentColor" stroke-width="2" fill="none"/></svg> ' : entry.speaker === 'patient' ? '<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="2" fill="none"/><path d="M4 20v-2a8 8 0 0116 0v2" stroke="currentColor" stroke-width="2" fill="none"/></svg> ' : '<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect x="5" y="2" width="14" height="20" rx="2" stroke="currentColor" stroke-width="2" fill="none"/><line x1="12" y1="18" x2="12" y2="18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg> '}${entry.name}
                     </div>
                     <div>${entry.text}</div>
                 `;
@@ -7344,10 +7385,10 @@
                 <div style="margin-bottom: 1rem;">
                     <h5 style="color: var(--text-primary); margin-bottom: 0.5rem;">Plan</h5>
                     <ul style="margin-left: 1rem;">
-                        <li>✅ Lisinopril refill ordered</li>
-                        <li>✅ PCP follow-up scheduled</li>
-                        <li>📋 Depression screening ordered</li>
-                        <li>📞 Follow-up call in 3 days</li>
+                        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#22c55e"/><path d="M8 12L11 15L16 9" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Lisinopril refill ordered</li>
+                        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#22c55e"/><path d="M8 12L11 15L16 9" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> PCP follow-up scheduled</li>
+                        <li><svg width="32" height="32" viewBox="0 0 64 64" fill="none"><rect x="12" y="12" width="40" height="44" rx="4" stroke="#2DD4BF" stroke-width="3" fill="none"/><rect x="24" y="6" width="16" height="12" rx="2" stroke="#2DD4BF" stroke-width="2" fill="none"/><line x1="20" y1="28" x2="44" y2="28" stroke="#2DD4BF" stroke-width="2"/><line x1="20" y1="38" x2="44" y2="38" stroke="#2DD4BF" stroke-width="2"/><line x1="20" y1="48" x2="36" y2="48" stroke="#2DD4BF" stroke-width="2"/></svg> Depression screening ordered</li>
+                        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91" stroke="currentColor" stroke-width="2" fill="none"/></svg> Follow-up call in 3 days</li>
                     </ul>
                 </div>
                 
@@ -7361,25 +7402,25 @@
             logContent.innerHTML = `
                 <div style="border-bottom: 1px solid var(--border); padding-bottom: 0.75rem; margin-bottom: 0.75rem;">
                     <div style="display: flex; justify-content: space-between; align-items: center;">
-                        <span>📞 TCM Call Completed</span>
+                        <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91" stroke="currentColor" stroke-width="2" fill="none"/></svg> TCM Call Completed</span>
                         <span style="color: var(--text-muted); font-size: 0.7rem;">Just now</span>
                     </div>
                 </div>
                 <div style="border-bottom: 1px solid var(--border); padding-bottom: 0.75rem; margin-bottom: 0.75rem;">
                     <div style="display: flex; justify-content: space-between; align-items: center;">
-                        <span>💊 Lisinopril Refill Ordered</span>
+                        <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="3" y="8" width="18" height="8" rx="4" stroke="currentColor" stroke-width="2" fill="none"/><line x1="12" y1="8" x2="12" y2="16" stroke="currentColor" stroke-width="2"/></svg> Lisinopril Refill Ordered</span>
                         <span class="badge badge-success">Done</span>
                     </div>
                 </div>
                 <div style="border-bottom: 1px solid var(--border); padding-bottom: 0.75rem; margin-bottom: 0.75rem;">
                     <div style="display: flex; justify-content: space-between; align-items: center;">
-                        <span>📅 PCP Follow-up Scheduled</span>
+                        <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="18" rx="2" stroke="currentColor" stroke-width="2" fill="none"/><line x1="3" y1="10" x2="21" y2="10" stroke="currentColor" stroke-width="2"/><line x1="8" y1="2" x2="8" y2="6" stroke="currentColor" stroke-width="2"/><line x1="16" y1="2" x2="16" y2="6" stroke="currentColor" stroke-width="2"/></svg> PCP Follow-up Scheduled</span>
                         <span class="badge badge-success">Done</span>
                     </div>
                 </div>
                 <div style="padding-bottom: 0.75rem;">
                     <div style="display: flex; justify-content: space-between; align-items: center;">
-                        <span>📋 Depression Screening</span>
+                        <span><svg width="32" height="32" viewBox="0 0 64 64" fill="none"><rect x="12" y="12" width="40" height="44" rx="4" stroke="#2DD4BF" stroke-width="3" fill="none"/><rect x="24" y="6" width="16" height="12" rx="2" stroke="#2DD4BF" stroke-width="2" fill="none"/><line x1="20" y1="28" x2="44" y2="28" stroke="#2DD4BF" stroke-width="2"/><line x1="20" y1="38" x2="44" y2="38" stroke="#2DD4BF" stroke-width="2"/><line x1="20" y1="48" x2="36" y2="48" stroke="#2DD4BF" stroke-width="2"/></svg> Depression Screening</span>
                         <span class="badge badge-warning">Pending</span>
                     </div>
                 </div>
