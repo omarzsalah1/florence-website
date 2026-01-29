@@ -3278,14 +3278,10 @@
 
 /* Progress Indicator */
 .progress-nav {
-    position: fixed;
-    right: 24px;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 1000;
-    display: none; /* Hidden - was causing black bar issue */
-    flex-direction: column;
-    gap: 12px;
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
 }
 
 .progress-dot {
@@ -4078,18 +4074,7 @@
         </div>
     </noscript>
 
-    <!-- Progress Navigation -->
-    <nav class="progress-nav" id="progressNav">
-        <div class="progress-dot" data-label="Home" data-section="hero"></div>
-        <div class="progress-dot" data-label="Challenge" data-section="problem"></div>
-        <div class="progress-dot" data-label="Day in Life" data-section="day-in-life"></div>
-        <div class="progress-dot" data-label="How It Works" data-section="phases"></div>
-        <div class="progress-dot" data-label="Escalation" data-section="escalation"></div>
-        <div class="progress-dot" data-label="For You" data-section="persona"></div>
-        <div class="progress-dot" data-label="Capabilities" data-section="capabilities"></div>
-        <div class="progress-dot" data-label="Platform" data-section="platform"></div>
-        <div class="progress-dot" data-label="Security" data-section="security"></div>
-    </nav>
+    <!-- Progress Navigation - REMOVED to fix black bar issue -->
 
     <!-- Navigation -->
     <nav>
